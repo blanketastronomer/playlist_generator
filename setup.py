@@ -9,5 +9,6 @@ setup(
     author='blanketastronomer',
     author_email='blanketastronomer@users.noreply.github.com',
     description=' A GUI playlist generator for my commandline music player.',
-    python_requires=">=3.6.5"
+    python_requires=">=3.6.5",
+    scripts=['bin/playlist-generator']
 )
