@@ -1,6 +1,5 @@
-#!/usr/bin/env python
 from playlist_generator.application import Application
 
-app = Application()
-
-app.run()
+def run():
+    app = Application()
+    app.run()
