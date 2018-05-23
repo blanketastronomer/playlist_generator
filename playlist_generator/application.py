@@ -27,7 +27,7 @@ class Application():
         self.item_frame.destroy()
         self.reset_item_frame()
 
-        filename = fd.askopenfilename(initialdir='.', title='Select File', filetypes=self.FILE_TYPES)
+        filename = fd.askopenfilename(initialdir='.', title='Load File', filetypes=self.FILE_TYPES)
 
         try:
             with open(filename, 'r') as read_file:
@@ -51,7 +51,7 @@ class Application():
         """
         print("Saving playlist...")
         data = dict(songs=[])
-        filename = fd.asksaveasfilename(initialdir='.', title='Select File', filetypes=self.FILE_TYPES)
+        filename = fd.asksaveasfilename(initialdir='.', title='Save File', filetypes=self.FILE_TYPES)
 
         elements = self.item_frame.interior.winfo_children()
 
