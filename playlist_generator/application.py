@@ -1,5 +1,6 @@
 import tkinter as tk
 from playlist_generator.removable_item import RemovableItem
+from playlist_generator.vertical_scrolled_frame import VerticalScrolledFrame
 
 class Application():
     def __init__(self):
@@ -60,7 +61,7 @@ class Application():
             None
         """
         print("Adding an item to the playlist...")
-        item = RemovableItem(self.item_frame)
+        item = RemovableItem(self.item_frame.interior)
         item.pack()
 
     def build_ui(self):
@@ -74,7 +75,8 @@ class Application():
 
         # Frames
         button_frame = tk.Frame(self.main_window)
-        self.item_frame = tk.Frame(self.main_window)
+        # self.item_frame = tk.Frame(self.main_window)
+        self.item_frame = VerticalScrolledFrame(self.main_window)
 
         # Button
         btn = tk.Button(button_frame, text='Add playlist item', command=self.add_item)
