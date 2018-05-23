@@ -50,6 +50,20 @@ class Application():
             * Implement this function.
         """
         print("Saving playlist...")
+        data = dict(songs=[])
+        filename = fd.asksaveasfilename(initialdir='.', title='Select File', filetypes=self.FILE_TYPES)
+
+        elements = self.item_frame.interior.winfo_children()
+
+        for element in elements:
+            item = dict(title=element.name.get(), url=element.url.get())
+            data['songs'].append(item)
+
+        try:
+            with open(filename, 'w') as write_file:
+                json.dump(data, write_file, indent=True)
+        except FileNotFoundError:
+            print(f"The system cannot find the specified file at {filename}")
 
     def build_menu(self):
         """
