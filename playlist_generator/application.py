@@ -1,4 +1,6 @@
+import json
 import tkinter as tk
+from tkinter import filedialog as fd
 from playlist_generator.removable_item import RemovableItem
 from playlist_generator.vertical_scrolled_frame import VerticalScrolledFrame
 
@@ -8,6 +10,7 @@ class Application():
         The main application.
         """
         self.main_window = tk.Tk()
+        self.FILE_TYPES = (("json files", "*.json"), ("all files", "*.*"))
 
     def load_playlist(self):
         """
@@ -21,6 +24,20 @@ class Application():
 
         """
         print("Loading playlist...")
+        self.item_frame.destroy()
+        self.reset_item_frame()
+
+        filename = fd.askopenfilename(initialdir='.', title='Select File', filetypes=self.FILE_TYPES)
+
+        try:
+            with open(filename, 'r') as read_file:
+                data = json.load(read_file)
+
+                for item in data['songs']:
+                    removable_item = RemovableItem(self.item_frame.interior, title=item['title'], url=item['url'])
+                    removable_item.pack()
+        except FileNotFoundError:
+            print(f"The system cannot find the specified file {filename}")
 
     def save_playlist(self):
         """
@@ -64,6 +81,10 @@ class Application():
         item = RemovableItem(self.item_frame.interior)
         item.pack()
 
+    def reset_item_frame(self):
+        self.item_frame = VerticalScrolledFrame(self.main_window)
+        self.item_frame.pack(side=tk.TOP)
+
     def build_ui(self):
         """
         Builds the application's user interface.
@@ -75,8 +96,8 @@ class Application():
 
         # Frames
         button_frame = tk.Frame(self.main_window)
-        # self.item_frame = tk.Frame(self.main_window)
-        self.item_frame = VerticalScrolledFrame(self.main_window)
+
+        self.reset_item_frame()
 
         # Button
         btn = tk.Button(button_frame, text='Add playlist item', command=self.add_item)
@@ -84,7 +105,6 @@ class Application():
 
         # Pack EVERYTHING
         button_frame.pack(side=tk.BOTTOM)
-        self.item_frame.pack(side=tk.TOP)
 
         # Ensure a playlist item is already in the window.
         self.add_item()
