@@ -3,7 +3,7 @@ from setuptools import find_packages
 
 setup(
     name='playlist_generator',
-    version='0.1.dev0',
+    version='0.1',
     packages=find_packages(),
     url='https://github.com/blanketastronomer/playlist_generator',
     license='MIT',
