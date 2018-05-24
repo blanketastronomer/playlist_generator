@@ -10,6 +10,7 @@ class Application():
         The main application.
         """
         self.main_window = tk.Tk()
+        self.main_window.title("Playlist Generator")
         self.FILE_TYPES = (("json files", "*.json"), ("all files", "*.*"))
 
     def load_playlist(self):
@@ -23,7 +24,7 @@ class Application():
             * Implement this function.
 
         """
-        print("Loading playlist...")
+        # print("Loading playlist...")
         self.item_frame.destroy()
         self.reset_item_frame()
 
@@ -49,7 +50,7 @@ class Application():
         Todo:
             * Implement this function.
         """
-        print("Saving playlist...")
+        # print("Saving playlist...")
         data = dict(songs=[])
         filename = fd.asksaveasfilename(initialdir='.', title='Save File', filetypes=self.FILE_TYPES)
 
@@ -91,7 +92,7 @@ class Application():
         Returns:
             None
         """
-        print("Adding an item to the playlist...")
+        # print("Adding an item to the playlist...")
         item = RemovableItem(self.item_frame.interior)
         item.pack()
 
